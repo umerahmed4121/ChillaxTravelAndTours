@@ -1,0 +1,137 @@
+{% extends 'base/base.html' %}
+
+{% block start %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/media/css/single_destination.css">
+    <link rel="stylesheet" href="/media/css/top_section.css">
+    <link rel="stylesheet" href="/media/css/main_crousel.css">
+    <link rel="stylesheet" href="/media/css/index.css">
+    <title>{{hotel.name}}</title>
+</head>
+<body>
+    <div class="container">
+
+        <!-- main crousel -->
+        <!-- static form single_dest -->
+        <div class="main_crousel">
+            <div class="static_card" style='
+            background:url("/media/{{hotel.hotel_image.last.image}}");
+            position: relative;
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            '>
+                
+                <h2>{{hotel.name}}</h2>
+            </div>
+        </div>
+
+        <!-- secondary navigation -->
+        <!-- single_destionation -->
+        <div class="centering_div">
+            <!-- main button -->
+
+            {% if user.is_authenticated and user.email != 'admin@gmail.com' %}
+            <button class="tour_book_button">
+                <a href="{% url 'order_confirmation' 'hotel' hotel.uid %}">Book this Hotel</a>
+            </button>
+            {% else %}
+            <button class="tour_book_button">
+                <a href="/accounts/login_signup">Book this Tour</a>
+            </button>
+            {% endif %}
+
+
+            
+
+
+            <div class="tour_description_navigation">
+                <ul>
+                    <li><a href="#description">Description</a></li>
+                    
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                </ul>
+    
+            </div>
+
+            <!-- description -->
+            <div id="description" class="description">
+                <h2>{{hotel.name}}</h2>
+                <h3>Description</h3>
+                <p>{{hotel.details}}</p>
+            
+                <div class="information">
+                    <div class="single_info">
+                        <h4 class="item1">Location</h4>
+                        <p>{{hotel.location}}</p>
+                    </div>
+                    
+
+                    <div class="single_info">
+                        <h4 class="item1">Included</h4>
+                        <div class="included">
+                            {% for act in facilities %}
+                            <p> {{act}}</p>
+                            {% endfor %}
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            
+            </div>
+
+            <!-- Gallery -->
+            <div id="gallery" class="gallery">
+                <h3>Gallery</h3>
+                <h4>Make Unforgettable Memories</h4>
+                <div class="image_gallery">
+                    {% for image in hotel.hotel_image.all %}
+                    <img src="/media/{{image.image}}"></a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- terms -->
+            <div id="terms" class="terms">
+                <h3>Terms and Condition</h3>
+                <h4>General:</h4>
+                <ul>
+                    <li>If the cancellation is made 7 days + prior to departure full payment will be refunded and a nominal communication service charge will be deducted.</li>
+                    <li>HikeWhiz reserves the right to deduct: > 25% cancellation charge from paid package price if the cancellation is made in less than 3 days of arrival date.</li>
+                    <li>In case of cancellation prior to arrival, all charges in respect of confirmed bookings that entail no-show charges by hotels/transport will have to be paid by the clients.</li>
+                    <li>Anyone deciding to abandon the trip after arrival or leave during the trip for whatever reason(s) whether the clients own or external (of the nature of force majored) will not be eligible for a refund. This also applies in case the entire group completes/abandons the trip and decides to return earlier than the agreed time schedlie.</li>
+                    <li>In case of change / cancellation of activities due to guest own reasons or any external reason, guests will not be eligible for refund.</li>
+                    <li>Smoking is strictly prohibited inside vehicle or in room (while sharing with others)</li>
+                </ul>
+                <h4>Child Policy:</h4>
+                <ul>
+                    <li>Infants (upto 2 years) will travel free of charge</li>
+                    <li>Kids below 7 years age will be charged at 50 %</li>
+                    <li>Kids of 7 years and above will be charged as adult</li>
+                </ul>
+                <h4>Payment Options Available:</h4>
+                <ul>
+                    <li>Online payment using debit or credit card</li>
+                    <li>Cash in our above offices</li>
+                    <li>Direct Bank Transfer</li>
+                </ul>
+            </div>
+
+        </div>
+        
+
+
+
+    </div>
+</body>
+</html>
+{% endblock  %}

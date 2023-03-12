@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Packages management</title>
+    <!-- order matters -->
+    <script
+      src="https://kit.fontawesome.com/e42bda399a.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="/media/css/tour_managment.css" />
+  </head>
+  <body>
+    <div class="container">
+      {% extends 'base/base_admin.html' %}
+      {% block start %}
+      <!-- content -->
+      <div class="center_content">
+        <div class="all_packages">
+          <h3>All Packages</h3>
+
+          <table class="table-content package-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Duration</th>
+                <th>Price</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Status</th>
+                <th>Operations</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for package in packages %}
+              
+                <tr>
+                  <td><a href="{% url 'get_package' package.slug %}" target="_blank">{{package.title}}</a></td>
+                  <td>{{package.location}}</td>
+                  <td>{{package.duration}}</td>
+                  <td>{{package.price}}</td>
+                  <td>{{package.created_at}}</td>
+                  <td>{{package.updated_at}}</td>
+                  <td>
+                    <!-- Rounded switch -->
+  
+                    <label class="switch">
+                      {% if package.status == True %}
+                      <input
+                        type="checkbox"
+                        id="status"
+                        name="status"
+                        value="True"
+                        checked
+                      />
+                      {% else %}
+                      <input
+                        type="checkbox"
+                        id="status"
+                        name="status"
+                        value="False"
+                      />
+                      {% endif %}
+  
+                      <span class="slider round">
+                        <a
+                          href="{% url 'status_update' 'package' package.uid %}"
+                          style="color: transparent"
+                          >0000000</a
+                        >
+                        <a
+                          href="{% url 'status_update' 'package' package.uid %}"
+                          style="color: transparent"
+                          >0000000</a
+                        >
+                      </span>
+                    </label>
+                  </td>
+                  <td>
+                    <a
+                      href="{% url 'edit_package' package.uid %}"
+                      style="color: #009879"
+                    >
+                      <i class="fa-sharp fa-solid fa-pen-to-square"> Edit</i></a
+                    >
+                    <a
+                      href="{% url 'delete_package' package.uid %}"
+                      style="color: #009879"
+                      ><i class="fa-sharp fa-solid fa-trash"> Delete</i></a
+                    >
+                  </td>
+                </tr>
+              
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="/media/javascript/tour_managment.js"></script>
+  </body>
+  {% endblock %}
+</html>
+

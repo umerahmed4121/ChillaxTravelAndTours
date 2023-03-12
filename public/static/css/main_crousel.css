@@ -1,0 +1,141 @@
+.main_crousel{
+    position: relative;
+    height: 100vh;
+    background-color: rgb(170, 245, 254);
+}
+
+.anchor{
+    padding:0.7em 1.3em;
+    border-radius: 0.3em;
+    text-decoration: none;
+    background-color: rgb(4, 197, 197);
+    color: white;
+    font-size: 1.3em;
+    
+}
+
+.main_crousel a{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% 0;
+    z-index: 1000;
+}
+.anchor:hover{
+    background-color: rgb(255, 88, 88);
+}
+
+
+
+
+.main_crousel-card{
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    
+} 
+
+.main_crousel-card:nth-child(2){
+    background: url('../images/index/1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    animation: card_animation_item1 20s infinite;
+    
+}
+.main_crousel-card:nth-child(3){
+    background: url('../images/index/2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    animation: card_animation_item2 20s infinite;
+   
+}
+.main_crousel-card:nth-child(4){
+    background: url('../images/index/3.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    animation: card_animation_item3 20s infinite;
+}
+
+@keyframes card_animation_item1 {
+    0%{
+        z-index: 100;
+        opacity: 0;
+    }
+    8%{
+        opacity: 1;
+    }
+    25%{
+        opacity: 1;
+    }
+    33.3%{
+        opacity: 0;
+        z-index: -1;
+    }
+    
+}
+@keyframes card_animation_item2 {
+    0%,30.2%{
+        z-index: -1;
+    }
+    30.3%{
+        opacity: 0;
+        z-index: 100;
+    }
+    37%{
+        opacity: 1;
+    }
+    61%{
+        opacity: 1;
+    }
+    66.7%{
+        opacity: 0;
+        z-index: -1;
+    }
+    
+}
+@keyframes card_animation_item3 {
+    0%,63.7%{
+        z-index: -1;
+    }
+    64%{
+        z-index: 100;
+        opacity: 0;
+    }
+    69%{
+        opacity: 1;
+    }
+    95%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        z-index: -1;
+    }
+    
+}
+
+.main_crousel-card h2{
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    translate: -55% 0;
+    font-size: 6em;
+    font-family: 'Caveat', cursive;
+    color: white;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+}
+
+@media screen and (max-width:760px) {
+    .main_crousel{
+        height: 50vh;
+        font-size: 0.8em;
+    }
+    .main_crousel-card{
+        height: 50vh;
+    } 
+}
+

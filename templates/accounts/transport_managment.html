@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transport management</title>
+    <!-- order matters -->
+    <script
+      src="https://kit.fontawesome.com/e42bda399a.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="/media/css/tour_managment.css" />
+    
+  </head>
+  <body>
+    <div class="container">
+     
+      <!-- left sidebar -->
+      {% extends 'base/base_admin.html' %}
+      {% block start %}
+
+      <!-- content -->
+      <div class="center_content">
+        <div class="all_packages">
+          <h3>All Transports</h3>
+          
+            
+          
+
+          <table class="table-content package-table">
+            <thead>
+              <tr>
+                <th>Transport</th>
+                <th>Color</th>
+                <th>Year</th>
+                <th>Price</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Status</th>
+                <th>Operations
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for transport in transports %}
+              <tr>
+                <td><a href="{% url 'get_transport' transport.slug %}" target="_blank">{{transport.make}} {{transport.model}} {{transport.varient}}</a></td>
+                <td>{{transport.color}}</td>
+                <td>{{transport.year}}</td>
+                <td>{{transport.price}}</td>
+                <td>{{transport.created_at}}</td>
+                <td>{{transport.updated_at}}</td>
+                <td>
+                  <!-- Rounded switch -->
+                  
+                    <label class="switch">
+                      
+                      {% if transport.status == True %}
+                      <input type="checkbox" id="status" name="status" value="True" checked />
+                      {% else %}
+                      <input type="checkbox" id="status" name="status" value="False" />
+                      {% endif %}
+                      
+                      <span id="toggleBtn" class="slider round">
+
+                        
+                      </span>
+                      <script>
+                        let btn = document.getElementById("toggleBtn");
+                        btn.addEventListener("click", function () {
+                          window.location = "{% url 'status_update' 'transport' transport.uid %}"
+                        })
+                      </script>
+                    </label>
+                  
+                  
+                </td>
+                <td>
+                  <a href="{% url 'edit_transport' transport.uid %}" style="color: #009879">
+                    <i class="fa-sharp fa-solid fa-pen-to-square"> Edit</i></a
+                  >
+                  <a href="{% url 'delete_transport' transport.uid %}" style="color: #009879"
+                    ><i class="fa-sharp fa-solid fa-trash"> Delete</i></a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <script src="/media/javascript/tour_managment.js"></script>
+  </body>
+
+  {% endblock %}
+</html>
+

@@ -1,0 +1,82 @@
+.sign_up_container{
+    background-color: rgb(255, 255, 255);
+}
+.sign_up_content{
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    padding: 1em;
+    max-width: 600px;
+    width: 60%;
+    background-color: rgb(20, 3, 3);
+}
+.sign_up_anchor{
+    padding:0.5em 1em;
+    background-color: rgb(47, 47, 255);
+    border-radius: 0.4em;
+    text-decoration: none;
+    color: white;
+}
+.sign_up_content p{
+    font-weight: 100;
+    font-size: 0.9em;
+    color: rgb(129, 129, 129);
+}
+.label_input{
+    flex: 1 1 250px;
+    position: relative;
+    background-color: rgb(81, 173, 253);
+}
+.label_input:nth-child(3),.label_input:nth-child(4){
+    flex: 1 1 300px;
+    position: relative;
+    background-color: rgb(81, 173, 253);
+}
+.label_input input{
+    /* border: 2px solid rgb(97, 97, 255); */
+    width: 100%;
+    padding: 1em;
+    border-radius: 0.4em;
+    background-color: rgb(224, 224, 224);
+}
+.label_input input:focus{
+    background-color: aliceblue;
+    border-radius: 0.5em;
+}
+.label_input input:hover{
+    border: 2px solid rgb(97, 97, 255);
+}
+.label_input label{
+    position: absolute;
+    background-color: white;
+    left: 10px;
+    translate: 0% -50%;
+    padding: 0.2em;
+    border-radius: 0.3em;
+    color: rgb(14, 14, 41);
+    font-size: 0.9em;
+    font-family: sans-serif;
+    transition: all 0.5s;
+}
+
+.input_flex{
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+.input_flex{
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+
+.signup_svg{
+    position: absolute;
+    transform: rotate(-90deg);
+    right: 50%;
+    /* z-index: -1; */
+}

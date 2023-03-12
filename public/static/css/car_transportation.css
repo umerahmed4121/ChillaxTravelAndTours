@@ -1,0 +1,271 @@
+/* overridign the background image in main corousel */
+.main_crousel-card{
+    background: url("../images/transport/transport_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: darken;
+    z-index: 1;
+}
+.main_crousel-card h2{
+    color: white;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    font-family: 'Caveat', cursive;
+    font-size: 5.4em;
+    font-weight: 1000;
+    top: 5%;
+    left: 50%;
+    translate: -55% 0;
+}
+body{
+    background-color: rgb(246, 251, 255);
+}
+.trans_car {
+    max-width: 1200px;
+    margin: auto;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+.trans_form {
+    font-size: 0.9em;
+    padding: 1em;
+    max-width: 600px;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 0.3em;
+    background-color: white;
+    box-shadow: 5px 5px 20px grey;
+}
+.trans_form p{
+    margin: 0.8em 0;
+}
+
+.trans_form  h3{
+    text-align: center;
+    margin-bottom: 1.3em;
+}
+.trans_form_extra_info{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.trans_input_return{
+    flex: 0 0 100px;
+    display: flex;
+    align-items: center;
+}
+.trans_input_travellers{
+    flex: 0 0 150px;
+    display: flex;
+    align-items: center;
+}
+.trans_input_price{
+    flex: 1 0 250px;
+}
+.trans_input_price input{
+    width: 90%;
+}
+input[type="number"]{
+    padding: 0.5em;
+    border-radius: 0.3em;
+    border: 1px solid grey;
+    outline: none;
+}
+select{
+    min-width: 100px;
+    padding: 0.4em;
+    font-family: sans-serif;
+    font-size: 1.05em;
+    border-radius: 0.3em;
+}
+select:hover,select:focus{
+    outline: none;
+    border: 1.5px solid rgb(41, 41, 41);
+}
+.trans_form_main_info {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+.trans_form_main_info input[type="date"] {
+    font-size: 1.2em;
+}
+.trans_form_main_info input,.trans_form_main_info select{
+    width: 100%;
+    padding: 0.5em 0.4em;
+    border-radius: 0.3em;
+    outline: none;
+    border: 1.5px solid grey;
+}
+.trans_form_main_info input:focus,.trans_form_main_info select:focus{
+    border: 1.5px solid rgb(54, 54, 54);
+}
+.trans_input_Pcity{
+    flex: 1 1 100%;
+}
+.trans_input_PDate,.trans_input_DDate{
+    flex:1 0 250px;
+}
+.trans_input_PTime,.trans_input_DTime{
+    flex:1 0 250px;
+}
+.trans_input_search{
+    flex: 1 0 100%;
+}
+.trans_input_search button{
+    width: 100%;
+    padding: 0.5em;
+    font-size: 1.2em;
+    background-color: rgb(53, 53, 245);
+    color: white;
+    border: none;
+    border-radius: 0.3em;
+}
+
+
+/* car result */
+.car_result{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+/* car card */
+.car_card{
+    background-color: white;
+    display: flex;
+    gap: 1em;
+    border-radius: 1em;
+    padding: 1em;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.363);
+}
+.car_card p{
+    margin: 0.5em;
+}
+.car_image_div{
+    flex: 1 0 300px;
+}
+
+.car_image_div img{
+    width: 100%;
+}
+.car_content{
+    flex: 1 0 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.car_content .main_text{
+    font-weight: 900;
+    font-size: 1.5em;
+    margin-bottom: 0em;
+}
+.car_content p:nth-child(2){
+    margin-top: 0em;
+}
+.car_icons{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.car_icons .icon{
+    display: flex;
+    align-items: center;
+}
+.car_icons .icon i{
+    font-size: 1.3em;
+    color: rgb(91, 91, 241);
+}
+.car_booking_price{
+    align-self: center;
+    flex: 1 0 200px;
+}
+.car_booking_price p:nth-child(1){
+    color: rgb(236, 93, 93);
+    font-weight: 600;
+    font-size: 1.1em;
+}
+.car_booking_price p:nth-child(2),.car_booking_price p:nth-child(3){
+    color: grey;
+    font-size: 0.85em;
+}
+.car_card .car_terms_policies{
+    display: flex;
+    flex-wrap: wrap;
+}
+.car_terms_policies span{
+    font-size: 0.85em;
+    font-weight: 900;
+    color: rgb(16, 156, 16);
+    padding: 0.3em 0.3em;
+    border-right: 2px solid grey;
+
+}
+.car_booking_price{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.car_booking_price .book_car{
+    width: 60%;
+}
+.car_booking_price .book_car button{
+    border: none;
+    font-size: 1.1em;
+    color: white;
+    background-color: rgb(47, 47, 224);
+    border-radius: 0.3em;
+    padding: 0.4em;
+    width: 100%;
+}
+
+
+/* pop up car container */
+.popup_car_container{
+    scale: 0;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 1000;
+    position: fixed;
+    width: 90vw;
+    height: 90vh;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid grey;
+    border-radius: 1em;
+    transition: transform 0.5s;
+}
+.popup_car_container_active{
+    transform: scale(1);
+}
+@media screen and (max-width:600px) {
+    .trans_car{
+        width: 90%;
+        padding: 0.5em 0.35em;
+    }
+}
+@media screen and (max-width:400px) {
+    .trans_car{
+        width: 100%;
+        padding: 0 0;
+    }
+    .trans_form{
+        width: 95%;
+    }
+}
+@media screen and (max-width:1000px) {
+    .car_card{
+        flex-direction: column;
+    }
+    .car_card .car_content,.car_booking_price,.car_image_div{
+        flex: 0 0 0;
+        width: 100%;
+    }
+    .car_booking_price .book_car{
+        width: 100%;
+    }
+    .car_terms_policies{
+        justify-content: space-around;
+    }
+}

@@ -1,0 +1,93 @@
+/* top section */
+.top_section{
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 1em;
+    background-color: white;
+}
+.logo{
+    display: flex;
+    gap: 1em;
+}
+.logo h1{
+    margin: 0;
+    font-size: 1.6em;
+}
+/* menu button */
+.menu_button{
+    width:2.5em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    display: none;
+}
+.menu_button span{
+    position: absolute;
+    inset: 0 0 0 0;
+    width: 90%;
+    height: 0.3em;
+    margin: auto;
+    background-color: lightcoral;
+    transition: transform 0.5s;
+}
+.menu_button:hover{
+    background-color: #a6538b;
+}
+.menu_button span:nth-child(1){
+    translate:0 -200%;
+}
+.menu_button span:nth-child(3){
+    translate:0 200%;
+}
+/* menubutton transformed */
+.menu_button_transfromed span:nth-child(1){
+    transform:translate(0,200%) rotate(-45deg) ;
+}
+.menu_button_transfromed span:nth-child(3){
+    transform:translate(0,-200%) rotate(45deg) ;
+}
+.menu_button_transfromed span:nth-child(2){
+    transform:translate(-200%,0%) scale(0) ;
+}
+/* search and calender */
+.search_calender{
+    display: flex;
+    gap: 1em;
+}
+.search_calender .search,.search_calender .calender{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    flex: 1 1 200px;
+}
+.search_calender .search{
+    flex: 1 1 300px;
+}
+.search_calender input{
+    width: 100%;
+    border-radius: 1em;
+    padding: 0.5em;
+    border: 1px solid grey;
+}
+/* admin img */
+.noti-admin_avatar{
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+}
+.admin_avatar{
+    display: flex;
+    gap: 0.5em;
+}
+.admin_avatar img{
+    align-self: center;
+    border-radius: 50%;
+    width: 3em;
+    aspect-ratio: 1;
+}

@@ -1,0 +1,56 @@
+{% block start %}
+
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="https://kit.fontawesome.com/e42bda399a.js" crossorigin="anonymous"></script>
+    
+        <link rel="stylesheet" href="/media/css/left_sidebar.css">
+        <link rel="stylesheet" href="/media/css/tour_managment.css">
+    </head>
+    <body>
+        
+        <form class="tour_form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="popup_tour_container">
+                <h2>Add image</h2>
+                {% include "base/alert.html" %}
+                <div class="tour_form_main_info">
+                    {{ form.as_div }}
+
+                    
+
+                    {% if obj %}
+                    <h3>Succesfully Uploaded : {{img_obj.caption}}</h3>
+                    <img src="{{obj.image.url}}" alt="IMAGE">
+                    {% endif %}
+                    
+                    
+
+                    
+                    <div class="tour_input tour_input_From">
+                        <button type="submit" class="tour_input tour_input_From">Add</button>
+                    </div>
+                </div>
+            </div>  
+        </form>
+        
+    </body>
+</html>
+
+{% endblock %}
+
+
+
+
+
+
+

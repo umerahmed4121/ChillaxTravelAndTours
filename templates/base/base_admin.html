@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="stylesheet" href="/media/css/top_section_admin.css" />
+	<link rel="stylesheet" href="/media/css/left_sidebar.css" />
+  </head>
+  <body>
+    <div class="top_section">
+      <div class="logo">
+        <div class="menu_button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <a href="/accounts/dashboard"><img style="height:50px" src="/media/images/logo_chillax2.png" alt="Chillax Travel and Tours"></a>
+      </div>
+      <div class="search_calender">
+        <div class="search">
+          
+
+          <form class="search" method="get">
+            <button type="submit" style="border-width: 0; background: white;"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input name="search" type="text" placeholder="Search" />
+          </form>
+        </div>
+
+      </div>
+
+      <div class="noti-admin_avatar">
+        <div class="notification"><i class="fa-regular fa-bell"></i></div>
+        <div class="admin_avatar">
+          <p>Admin</p>
+          <img src="/media/images/guest_img.webp" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <!-- left sidebar -->
+    <div class="left_sidebar">
+      <ul>
+        <li><a href="/accounts/dashboard">Dashboard</a></li>
+        <li><a href="/accounts/user_management">Users</a></li>
+        <li><a href="/accounts/tour_management">Tour Packages</a></li>
+        <li><a href="/accounts/hotel_management">Hotels</a></li>
+        <li><a href="/accounts/transport_management">Transports</a></li>
+        <li><a href="/accounts/add_package">Add Package</a></li>
+        <li><a href="/accounts/add_hotel">Add Hotel</a></li>
+        <li><a href="/accounts/add_transport">Add Transport</a></li>
+      </ul>
+    </div>
+
+    {% block start %}
+	
+	{% endblock %}
+
+    <script src="/media/javascript/menu_button_admin.js"></script>
+    
+  </body>
+</html>

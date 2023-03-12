@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel management</title>
+    <!-- order matters -->
+    <script
+      src="https://kit.fontawesome.com/e42bda399a.js"
+      crossorigin="anonymous"
+    ></script>
+    
+    <link rel="stylesheet" href="/media/css/tour_managment.css" />
+    
+  </head>
+  <body>
+    <div class="container">
+     
+      <!-- left sidebar -->
+      {% extends 'base/base_admin.html' %}
+      {% block start %}
+      <!-- content -->
+      <div class="center_content">
+        <div class="all_packages">
+          <h3>All Hotels</h3>
+          
+            
+          
+
+          <table class="table-content package-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Rooms</th>
+                <th>Price</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Status</th>
+                <th>Operations
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for hotel in hotels %}
+              <tr>
+                <td><a href="{% url 'get_hotel' hotel.slug %}" target="_blank">{{hotel.name}}</a></td>
+                <td>{{hotel.location}}</td>
+                <td>{{hotel.rooms}}</td>
+                <td>{{hotel.price}}</td>
+                <td>{{hotel.created_at}}</td>
+                <td>{{hotel.updated_at}}</td>
+                <td>
+                  <!-- Rounded switch -->
+                  
+                    <label class="switch">
+                      
+                      {% if hotel.status == True %}
+                      <input type="checkbox" id="status" name="status" value="True" checked />
+                      {% else %}
+                      <input type="checkbox" id="status" name="status" value="False" />
+                      {% endif %}
+                      
+                      <span class="slider round">
+                        <a href="{% url 'status_update' 'hotel' hotel.uid %}" style="color: transparent;">0000000</a>
+                        <a href="{% url 'status_update' 'hotel' hotel.uid %}" style="color: transparent;">0000000</a>
+                      </span>
+                    </label>
+                  
+                  
+                </td>
+                <td>
+                  <a href="{% url 'edit_hotel' hotel.uid %}" style="color: #009879">
+                    <i class="fa-sharp fa-solid fa-pen-to-square"> Edit</i></a
+                  >
+                  <a href="{% url 'delete_hotel' hotel.uid %}" style="color: #009879"
+                    ><i class="fa-sharp fa-solid fa-trash"> Delete</i></a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <script src="/media/javascript/tour_managment.js"></script>
+  </body>
+
+  {% endblock %}
+</html>
+

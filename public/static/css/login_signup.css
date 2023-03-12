@@ -1,0 +1,274 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(10, 17, 54);
+    font-family:Arial, Helvetica, sans-serif;
+}
+*{
+    box-sizing: border-box;
+}
+
+.alert-success {
+    color: #005e0c;
+    background-color: #ccf0d1;
+    border-color: #b8eabe;
+}
+
+.alert-warning {
+    color: #854b0c;
+    background-color: #ffe9d1;
+    border-color: #ffe0be;
+}
+.alert {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.37rem;
+}
+
+.signup_container{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    padding: 2em;
+    margin: 0 auto;
+    min-height: 100vh;
+    align-items: center;
+}
+.button_div{
+    display: inline;
+    padding: 0.5em;
+}
+.button_div button{
+    font-size: 1.1em;
+    font-weight: 900;
+    border:none;
+    border-radius: 0.8em;
+    padding: 0.3em 1.5em;
+    color: white;
+    background-color: rgb(20, 20, 20);
+    
+}
+.button_div .active_function{
+    border-bottom: 5px solid blue;
+}
+
+.slider_icon{
+    width: 60px;
+    height: 20px;
+    background-color: rgb(253, 253, 253);
+    border: 1px solid black;
+    border-radius: 0.9em;
+    position: relative;
+}
+
+.icon{
+    color: white;
+    font-weight: 900;
+    font-size: 1.3em;
+    position: absolute;
+    height: 30px;
+    aspect-ratio: 1;
+    top: -10%;
+    right: 105% ;
+    translate: 100%;
+    border-radius: 50%;
+    background-color: rgb(5, 30, 255);
+    transform: rotate(-35deg);
+    transition: all 0.5s linear;
+}
+.icon i{
+    position: absolute;
+    transform: translate(7px,5px);
+}
+.icon_signup{
+    right:-5px ;
+    transform:translate(-100%,0px) rotate(25deg) ;
+}
+
+.login-signup{
+    margin-top: 1em;
+    width: 100%;
+    max-width: 600px;
+    height:80vh;
+    
+}
+.content{
+    max-width: 100%;
+    height: 100%;
+    transition: transform 1s;
+    background-color: rgb(10, 17, 54);
+    transform-style: preserve-3d;
+    position: relative;
+}
+.content h3{
+    margin: 0;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 900;
+    color: white;
+}
+.content_signup{
+    transform: rotateY(0.5turn);
+}
+/* default */
+.front_side,.back_side{
+    padding: 20px;
+    position: absolute;
+    background-size:150% ;
+}
+.front_side{
+    top: 0.5%;
+    left: 50%;
+    translate: -50% ;
+    width: 99%;
+    min-width: 300px;
+    height: 99%;
+    background-color: white;
+    border-radius: 10px;
+    transform:rotateY(180deg) translateZ(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around ;
+}
+.front_side form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.front_side .input_div input{
+    padding: 0.6em;
+    border-radius: 0.3em;
+    background-color: #a6538b;
+    border: none;
+    color: white;
+    font-size: 1.1em;
+    padding: 0.6em;
+}
+.input_group_state{
+    display: flex;
+    gap: 0.4em;
+}
+.input_group_state div{
+    flex: 1 1 20px;
+}
+.input_group_state select {
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    background-color:white;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.back_side{
+    top: 0%;
+    left: 50%;
+    translate: -50% ;
+    border-radius: 10px;
+    width: 90%;
+    min-width: 300px;
+    height: 80%;
+    background-image: url("/media/pattern.jpg");
+    background-position: cover;
+    background-color: white;
+    transform: translateZ(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around ;
+
+    
+}
+.back_side form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+::placeholder{
+    color: white;
+}
+
+/* login side (back) */
+.input_div{
+    display: flex;
+    flex-direction: column;
+}
+.input_div label{
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+}
+.back_side .input_div input{
+    padding: 0.6em;
+    border-radius: 0.3em;
+    background-color:#a6538b;
+    border: none;
+    color: white;
+    font-size: 1.1em;
+    padding: 0.6em;
+}
+.member_buttons{
+    display: flex;
+    justify-content: space-around;
+}
+.member_buttons .button{
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.button{
+    padding: 0.5em 1em;
+    font-size: 1em;
+    font-weight: 600;
+    background-color: rgb(5, 30, 255);
+    color: whitesmoke;
+    border: none;
+    border-radius: 0.2em;
+    cursor: pointer;
+}
+.final_button{
+    font-weight: 900;
+}
+.final_button:hover{
+    color: white;
+    background-color: rgb(10, 17, 54);
+
+}
+.active_member{
+    background-color: rgb(255, 0, 0);
+}
+/* signup side (front) */
+
+.input_group{
+    display: flex;
+    gap: 10px;
+}
+.input_group .input_div{
+    flex: 1 0 30%;
+}
+.front_side label,.front_side h3{
+    color: rgb(0, 0, 0);
+}
+.front_side input{
+    padding: 0.6em;
+    border-radius: 0.3em;
+    border: 1px solid grey;
+    font-size: 1.1em;
+    padding: 0.6em;
+}
+@media screen and (max-width:700px) {
+    .input_group{
+        flex-direction: column;
+    }
+    /* .input_group_state{
+        font-size: 0.8em;
+    } */
+    .front_side form{
+        font-size: 0.8em;
+    }
+    *{
+        font-size: 1em;
+    }
+}

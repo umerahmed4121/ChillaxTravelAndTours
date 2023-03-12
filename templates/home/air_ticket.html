@@ -1,0 +1,9 @@
+{% extends 'base/base.html' %}
+
+{% block start %}
+
+{% for ticket_class in air_tickets%}
+    <h1>{{ticket_class.arrival_date}}</h1>
+{% endfor %}
+
+{% endblock  %}

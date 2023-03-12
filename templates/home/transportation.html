@@ -1,0 +1,306 @@
+{% extends 'base/base.html' %}
+
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flights</title>
+    <script src="https://kit.fontawesome.com/e42bda399a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/media/css/index.css">
+    <link rel="stylesheet" href="/media/css/main_crousel.css">
+    <link rel="stylesheet" href="/media/css/transportation.css">
+</head>
+<body>
+    <div class="container">
+        <!-- main crousel -->
+        <!-- link main_crousel (for responsive) -->
+        <!-- link transportation (to override the image in corousel card) -->
+        <div class="main_crousel">
+            <div class=" main_crousel-card">
+                <h2>Flights for you</h2>
+            </div>
+        </div>
+
+
+        <!-- transportation -->
+        <div class="trans_flight">
+            <h1>Welcome! Find a flexible flight for your next trip</h1>
+            <div class="trans_form">
+              <h3>Search Flight Fliter</h3>
+                <form action="#" id="trans_flight_form">
+                    <div class="trans_form_extra_info">
+                        <div class="trans_input_return">
+                            <!-- not required in from data so removed name attribute -->
+                            <select  required>
+                                <option value="return">Return</option>
+                                <option value="one-way">One-way</option>
+                            </select>
+                        </div>
+                        <div class="trans_input_travellers">
+                            <span>Travellers</span> 
+                            <input name="adults" required type="number" value="1" min="0" max="8">
+                        </div>
+                        <div class="trans_input_economy">
+                            <span>Economy/First class</span>
+                        </div>
+                        
+                    </div>
+                    <div class="trans_form_main_info">
+                        <div class="trans_input trans_input_From">
+                            <p>From :</p>
+                            <select name="origin">
+                                {% for flight in all_flights %}
+                                <option value="{{flight.code}}">{{flight.airport}}({{flight.code}}), {{flight.country}}</option>
+                                {% endfor %}
+                                
+                            </select>
+                            
+                        </div>
+                        <div class="trans_input trans_input_To">
+                            <p>To :</p> 
+                            <select name="destination">
+                                {% for flight in all_flights %}
+                                <option value="{{flight.code}}">{{flight.airport}}({{flight.code}}), {{flight.country}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="trans_input trans_input_Ddate">
+                            <p>Depart :</p> <input name="departureDate" required type="date" >
+                        </div>
+                        <div class="trans_input trans_input_Rdate">
+                            <p>Return :</p> <input name="returnDate" required type="date" >
+                        </div>
+                        <div class="trans_input trans_input_search">
+                            <button type="submit">Search</button>
+                        </div>
+                    </div>
+    
+                </form>
+            </div>
+            <div class="flight_result">
+                <div class="Best_flight flight_type">
+    
+                </div>
+                <div class="Cheapest_flight flight_type">
+                    
+                </div>
+                <div class="Fastest_flight flight_type">
+                    
+                </div>
+            </div>
+        </div>
+    
+        
+        
+    </div>
+    
+    <script>
+        // let air_ticket_type="return"
+        const trans_input_return=document.querySelector(".trans_input_return select")
+
+        trans_input_return.addEventListener("change",()=>{
+            if(trans_input_return.value==="return"){
+                
+                document.querySelector(".trans_input_search").remove()
+                div1 = document.createElement("div")
+                div1.classList.add("trans_input_Rdate")
+                div1.classList.add("trans_input")
+                div1.innerHTML=`<p>Return :</p> <input name="Return_date" required type="date" >`
+                
+                div2 = document.createElement("div")
+                div2.classList.add("trans_input_search")
+                div2.classList.add("trans_input")
+                div2.innerHTML=`<button type="submit">Search</button>`
+                document.querySelector(".trans_form_main_info").append(div1,div2)
+            }else{
+                document.querySelector(".trans_input_Rdate").remove()
+            }
+        })
+        const trans_flight_form=document.getElementById("trans_flight_form")
+        trans_flight_form.addEventListener("submit",(e)=>{
+            e.preventDefault()
+            const formdata=new FormData(e.target)
+            const form_obj = {};
+            formdata.forEach((value, key) => (form_obj[key] = value));
+            console.log(form_obj)
+            data_fetcher(form_obj)
+
+
+        })
+        function segment_maker(segment_arr) {
+            let segment_innerhtml=""
+            segment_arr.forEach((segment_item,index)=>{
+                segment_innerhtml+=
+                `
+                
+                <div class="segment_card ">
+                        <p class="segment_card_heading">Segment ${index+1}</p>
+                        <div class="important_info segment_imp_info">
+                        <div class="to_from_airports">
+                            <div class="airport_city">
+                                <p class="to_airport">${segment_item.origin.flightPlaceId}</p>
+                                <p class="to_city">${segment_item.origin.parent.name}</p>
+                                <div class="d_time">
+                                    <p class="small">Departure time</p>
+                                    <p class="bold">${segment_item.departure}</p>
+                                </div>
+                            </div>
+                            <div class="logo_airline">
+                                <p class="carrier">${segment_item.marketingCarrier.name}</p>
+                            </div>
+                            
+                            <div class="airport_city">
+                                <p class="to_airport">${segment_item.destination.flightPlaceId}</p>
+                                <p class="to_city">${segment_item.destination.parent.name}</p>
+                                <div class="d_time">
+                                    <p class="small">Arrival time</p>
+                                    <p class="bold">${segment_item.arrival}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                `
+
+            })
+            
+            return segment_innerhtml
+            
+        }
+        function flight_card_maker(flights_arr,node) {
+            flights_arr.forEach(flight_detail=>{
+                
+                let total_html=''
+                let flight_card_hmtl=''
+                flight_card_hmtl=
+                `
+                    <div class="important_info">
+                        <div class="to_from_airports">
+                            <div class="airport_city">
+                                <p class="to_airport">${flight_detail.legs[0].origin.id}</p>
+                                <p class="to_city">${flight_detail.legs[0].origin.city}</p>
+                                <div class="d_time">
+                                    <p class="small">Departure time</p>
+                                    <p class="bold">${flight_detail.legs[0].departure}</p>
+                                </div>
+                            </div>
+                            <div class="logo_airline">
+                                <div>
+                                    <img src="${flight_detail.legs[0].carriers.marketing[0].logoUrl}" alt="">
+                                </div>
+                                <p class="carrier">${flight_detail.legs[0].carriers.marketing[0].name}</p>
+                            </div>
+                            
+                            <div class="airport_city">
+                                <p class="to_airport">${flight_detail.legs[0].destination.id}</p>
+                                <p class="to_city">${flight_detail.legs[0].destination.city}</p>
+                                <div class="d_time">
+                                    <p class="small">Arrival time</p>
+                                    <p class="bold">${flight_detail.legs[0].arrival}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price_booking">
+                            <p class="price">${flight_detail.price.formatted}</p>
+                            <a class="book_now" href="${flight_detail.deeplink}">Book Now</a>
+                            <a class="more_details" href="#" ><i class="fa-solid fa-arrows-up-down"></i> More details</a>
+                            
+                        </div>
+                    </div>
+                `
+                // for total duration
+                // ${flight_detail.legs[0].durationInMinutes}
+                // let segment=document.createElement("div")
+                // segment.classList.add("segment")
+                
+                if(flight_detail.legs[0].hasOwnProperty("segments")){
+                    
+                    segments_html=segment_maker(flight_detail.legs[0].segments)
+                    segments_html="<div class='segment segment_non_display'>"+segments_html+"</div>"
+
+                    // whole card of segment is mode here
+                    total_html="<div class='flight_card'>"+flight_card_hmtl+segments_html+"</div>"
+                    node.innerHTML+=total_html
+                    return
+                }
+                total_html="<div class='flight_card'>"+flight_card_hmtl+"</div>"
+                node.innerHTML+=total_html
+                
+            })
+        }
+
+        function result_maker(data) {
+            data.itineraries.buckets.forEach(section => {
+                console.log(section)
+                if (section.name==="Best"){
+                    document.querySelector(".Best_flight").innerHTML=`<h2>${Object.keys(section.items).length} Best flights found</h2>`
+                    flight_card_maker(section.items,document.querySelector(".Best_flight"))
+                }
+                if (section.name==="Cheapest"){
+                    document.querySelector(".Cheapest_flight").innerHTML=`<h2>${Object.keys(section.items).length} Cheapest flights found</h2>`
+                    flight_card_maker(section.items,document.querySelector(".Cheapest_flight"))
+                }
+                if (section.name==="Fastest"){
+                    document.querySelector(".Fastest_flight").innerHTML=`<h2>${Object.keys(section.items).length} Fastest flights found</h2>`
+                    flight_card_maker(section.items,document.querySelector(".Fastest_flight"))
+                }
+                
+            });
+        }
+
+        async function data_fetcher(form_data) {
+          
+          const options = {
+            method: 'GET',
+            headers: {
+              'X-RapidAPI-Key': 'd02eca07e9msh5f95f4120056e5dp130f9djsn5ebc333c8191',
+              'X-RapidAPI-Host': 'skyscanner44.p.rapidapi.com'
+            }
+          };
+          const response=await fetch(`https://skyscanner44.p.rapidapi.com/search?adults=${form_data["adults"]}&origin=${form_data["origin"]}&destination=${form_data["destination"]}&departureDate=${form_data["departureDate"]}&currency=PKR`,options)
+          const data=await response.json()
+          console.log("response data",data)
+
+          if(data.hasOwnProperty('error')){
+              alert("check all the input fields")
+              return
+          }
+          console.log("result maker is working")
+          result_maker(data)
+          adding_event_handlers_to_anch_detail()
+        }
+
+
+        function adding_event_handlers_to_anch_detail(params) {
+          const more_details_arr=Array.prototype.slice.call(document.querySelectorAll(".more_details"))
+          more_details_arr.forEach((more_detail_anch)=>{
+            more_detail_anch.addEventListener("click",show_more_info)
+        })
+        }
+        
+        function show_more_info(e) {
+          e.preventDefault()
+          let element=e.target
+
+          const flight_card=element.parentNode.parentNode.parentNode.childNodes
+          if (flight_card.length==4){
+            const segments=flight_card[3]
+            if(segments.classList.contains("segment_non_display")){
+              element.innerHTML=`<i class="fa-solid fa-arrows-up-down"></i> More details`
+              segments.classList.remove("segment_non_display")
+              return
+            }
+            segments.classList.add("segment_non_display")
+            element.innerHTML=`<i class="fa-solid fa-arrows-up-down"></i> Hide details`
+          }
+        }
+
+
+    </script>
+</body>
+</html>
+
+{% endblock  %}

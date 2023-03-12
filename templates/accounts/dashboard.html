@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <!-- <link rel="stylesheet" href="./css/all.css"> -->
+
+    <script
+      src="https://kit.fontawesome.com/e42bda399a.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/media/css/dashboard.css" />
+    <link rel="stylesheet" href="/media/css/top_section_admin.css" />
+    <link rel="stylesheet" href="/media/css/left_sidebar.css" />
+    <!-- charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      {% extends 'base/base_admin.html' %} {% block start %}
+
+      <!-- content -->
+      <div class="center_content">
+        <div class="text_image">
+          <div class="text">
+            <h2>Welcome to Chillax Travel & Tours</h2>
+            <p>
+              Manage user, tour packages, hotels, flights and transports by
+              adding new items, editing or deleting the existing ones. Switch
+              status of items on basis of avilability
+            </p>
+          </div>
+          <div class="img">
+            <img src="/media/images/map_iamge.jpg" alt="" />
+          </div>
+        </div>
+        <!-- charts section -->
+        <div class="charts-section">
+          <div class="chart-div" onclick="event_handler_chart_div(this)">
+            <p class="big_p">{{no_of_users}}</p>
+            <p class="detail_p">3.3%</p>
+            <p>Total Users</p>
+          </div>
+          <div class="chart-div" onclick="event_handler_chart_div(this)">
+            <p class="big_p">{{no_of_packages}}</p>
+            <p class="detail_p">3.3%</p>
+            <p>Total Packages</p>
+          </div>
+          <div class="chart-div" onclick="event_handler_chart_div(this)">
+            <p class="big_p">{{no_of_hotels}}</p>
+            <p class="detail_p">3.3%</p>
+            <p>Total Hotels</p>
+          </div>
+          <div class="chart-div" onclick="event_handler_chart_div(this)">
+            <p class="big_p">{{no_of_transports}}</p>
+            <p class="detail_p">3.3%</p>
+            <p>Total Transports</p>
+          </div>
+        </div>
+        <!-- tour table -->
+        <div class="tour-table-section">
+         {% if packages %}
+         <h2>Tours status</h2>
+
+         <table class="table-content tour-table">
+           <thead>
+             <tr>
+               <th>Title</th>
+               <th>Location</th>
+               <th>Duration</th>
+               <th>Price</th>
+               <th>Created</th>
+               <th>Updated</th>
+               <th>Status</th>
+             </tr>
+           </thead>
+           <tbody>
+             {% for package in packages %}
+             <tr>
+              <td><a href="{% url 'get_package' package.slug %}" target="_blank">{{package.title}}</a></td>
+               <td>{{package.location}}</td>
+               <td>{{package.duration}}</td>
+               <td>{{package.price}}</td>
+               <td>{{package.created_at}}</td>
+               <td>{{package.updated_at}}</td>
+               <td>
+                 {% if package.status %}
+                  Active 
+                  {% else %} 
+                  Not active 
+                  {% endif %}
+               </td>
+             </tr>
+             {% endfor %}
+           </tbody>
+         </table>
+         {% endif %}
+
+         {% if hotels %}
+         <h2>Hotels status</h2>
+          <table class="table-content tour-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Rooms</th>
+                <th>Price</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for hotel in hotels %}
+              <tr>
+                <td><a href="{% url 'get_hotel' hotel.slug %}" target="_blank">{{hotel.name}}</a></td>
+                <td>{{hotel.location}}</td>
+                <td>{{hotel.rooms}}</td>
+                <td>{{hotel.price}}</td>
+                <td>{{hotel.created_at}}</td>
+                <td>{{hotel.updated_at}}</td>
+                <td>
+                  {% if hotel.status %} 
+                  Active
+                  {% else %}
+                  Not active
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+         {% endif %}
+          {% if transports %}
+          <h2>Transports status</h2>
+          <table class="table-content tour-table">
+            <thead>
+              <tr>
+                <th>Transport</th>
+                <th>Color</th>
+                <th>Year</th>
+                <th>Price</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for transport in transports %}
+              <tr>
+                <td><a href="{% url 'get_transport' transport.slug %}" target="_blank">{{transport.make}} {{transport.model}} {{transport.varient}}</a></td>
+                <td>{{transport.color}}</td>
+                <td>{{transport.year}}</td>
+                <td>{{transport.price}}</td>
+                <td>{{transport.created_at}}</td>
+                <td>{{transport.updated_at}}</td>
+                <td>
+                  {% if transport.status %} 
+                  Active
+                  {% else %}
+                  Not active
+                  {% endif %}
+                </td>
+  
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- right_sidebar -->
+      <div class="right_sidebar">
+        <div class="latest_activity">
+          <h3>Latest Updated</h3>
+        
+
+          <div class="clock-activities">
+            <div class="clock"></div>
+            <div class="activities">
+              <div class="individual-activity">
+                <p class="bold">{{last_up.updated_at}}</p>
+                <p>
+                  {{last_up}} (Updated)
+                </p>
+              </div>
+              <div class="individual-activity">
+                <p class="bold">{{slast_up.updated_at}}</p>
+                <p>
+                  {{slast_up}} (Updated)
+                </p>
+              </div>
+              <div class="individual-activity">
+                <p class="bold">{{tlast_up.updated_at}}</p>
+                <p>
+                  {{tlast_up}} (Updated)
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="latest_activity">
+          <h3>Latest Created</h3>
+        
+
+          <div class="clock-activities">
+            <div class="clock"></div>
+            <div class="activities">
+              <div class="individual-activity">
+                <p class="bold">{{last_cd.created_at}}</p>
+                <p>
+                  {{last_cd}} 
+                </p>
+              </div>
+              <div class="individual-activity">
+                <p class="bold">{{slast_cd.created_at}}</p>
+                <p>
+                  {{slast_cd}}
+                </p>
+              </div>
+              <div class="individual-activity">
+                <p class="bold">{{tlast_cd.created_at}}</p>
+                <p>
+                  {{tlast_cd}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="social_media">
+          <h3>Social Media</h3>
+          <table class="table-content social-media-table">
+            <thead>
+              <tr>
+                <th>Media</th>
+                <th>Share</th>
+                <th>Like</th>
+                <th>Members</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Youtube</td>
+                <td>12k</td>
+                <td>18k</td>
+                <td>250</td>
+              </tr>
+              <tr class="table-row-active">
+                <td>Facebook</td>
+                <td>12k</td>
+                <td>18k</td>
+                <td>160</td>
+              </tr>
+              <tr>
+                <td>Facebook</td>
+                <td>12k</td>
+                <td>18k</td>
+                <td>160</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- pop up charts -->
+      <!-- <div class="popup_chart_container">
+            <button>close</button>
+            <h2>Chart for</h2>
+            <p>Today's Views</p>
+            <canvas id="myChart"></canvas>
+        </div> -->
+    </div>
+
+    <script src="/media/javascript/charts_control.js"></script>
+  </body>
+  {% endblock %}
+</html>

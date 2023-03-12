@@ -1,0 +1,127 @@
+{% extends 'base/base.html' %}
+
+{% block start %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel</title>
+    <script src="https://kit.fontawesome.com/e42bda399a.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="/media/css/index.css">
+    <link rel="stylesheet" href="/media/css/main_crousel.css">
+    <link rel="stylesheet" href="/media/css/hotel.css">
+        
+</head>
+<body>
+    <div class="container">
+
+        <!-- navigation bar -->
+       
+
+        <!-- main crousel -->
+        <!-- link main_crousel (for responsive) -->
+        <!-- link destination (to override the image in corousel card) -->
+        <div class="main_crousel">
+            <div class=" main_crousel-card">
+                <h2>Hotels</h2>
+            </div>
+        </div>
+
+
+        <div class="places_form">
+            <h3>Where you want to go?</h3>
+            <form action="{% url 'hotels_index' %}" method="GET">
+                <input name="search" type="text" placeholder="Where to go?">
+                <select name="search_by" id="cars">
+                    <option value="hotel">Hotels</option>
+                    <option value="location">Locations</option>
+                    
+                </select>
+                <button type="submit">Search</button>
+            </form>
+            
+        </div>
+
+        <!-- places container -->
+        <div class="places_container">
+            <div class="filter">
+                
+                <h3>Filter</h3>
+                <form method="GET">
+                    <select class="input select" name="country"  id="country">
+                        <option value="all">All countries</option>
+                        {% for country in countries %}
+                        <option value="{{country}}">{{country}}</option>
+                        {% endfor %}
+                        
+                        
+                    </select>
+                    
+                    <div>
+                        <p>Price range</p> 
+                        <input name="price_range" class="input range" type="range" min="{{min_price}}" max="{{max_price}}" value="{{max_price}}" class="slider" id="myRange">
+                        <span class="lower_price">Rs. {{min_price}}</span>-<span class="lower_price">Rs. {{max_price}}</span>
+                    </div>
+                    <button type="submit" class="input search">Submit</button>
+                    
+                </form>
+            
+            </div>
+            <div class="places_dest popular_dest">
+                <div class="dest_grid">
+                    <!-- new cards -->
+                    {% if hotels %}
+                        {% for hotel in hotels %}
+                        {% if hotel.status == True %}
+                        <div class="places_dest_card grid-pop_places_card">
+                            <div class="grid-pop_places_card-price">Rs. {{hotel.price}}</div>
+                            <div class="places_card-img">
+                                <a href="{% url 'get_hotel' hotel.slug %}"><img src="/media/{{hotel.hotel_image.last.image}}" alt=""></a>
+                            </div>
+                            <div class="places_card-text">
+                                <h4><a href="{% url 'get_hotel' hotel.slug %}" class="title" style='text-decoration:none'>
+                                    <b>{{hotel.name}}</b>
+                                </a></h4>
+                                <p>{{hotel.location}}</p>
+                                <div class="pop_places_last_div">
+                                    <div class="rating_review">
+                                        <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-light fa-star"></i></div>
+                                        <p>(20 Review)</p>
+                                    </div>
+                                    <div>
+                                        <p><i class="fa-solid fa-bed"></i> {{hotel.rooms}}</p>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        
+                    
+                    {% else %}
+                    <h1 style="margin: auto">No hotels found</h2>
+                    {% endif %}
+                    
+                    <!-- new cards -->
+                    
+                </div>
+            
+            </div>
+
+        </div>
+
+
+        
+        <!-- footer -->
+        
+    </div>
+</body>
+
+</html>
+
+{% endblock  %}

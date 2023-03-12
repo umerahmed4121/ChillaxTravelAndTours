@@ -1,0 +1,145 @@
+{% extends 'base/base.html' %}
+
+{% block start %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transports</title>
+    <script src="https://kit.fontawesome.com/e42bda399a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/media/css/index.css">
+    <link rel="stylesheet" href="/media/css/main_crousel.css">
+    <link rel="stylesheet" href="/media/css/top_section.css">
+    <link rel="stylesheet" href="/media/css/car_transportation.css">
+</head>
+<body>
+    <div class="container">
+        
+
+        <!-- navigation bar -->
+        <!-- link top_section -->
+
+        <!-- main crousel -->
+        <!-- link main_crousel (for responsive) -->
+        <!-- link transportation (to override the image in corousel card) -->
+        <div class="main_crousel">
+            <div class=" main_crousel-card">
+                <h2>Rent a Car</h2>
+            </div>
+        </div>
+
+
+        <!-- transportation -->
+        <div class="trans_car">
+            <h1>Welcome! Find a car for your next trip</h1>
+            <div class="trans_form">
+                <h3>Search Car Fliter</h3>
+                <form action="{% url 'cars_index' %}" method="GET">
+                    <div class="trans_form_extra_info">
+
+                        <select class="input select" name="country"  id="country">
+                            <option value="all">All countries</option>
+                            {% for country in countries %}
+                            <option value="{{country}}">{{country}}</option>
+                            {% endfor %}
+                            
+                            
+                        </select>
+                        
+                        <div class="trans_input_price">
+                            <div>
+                                <p>Price range</p> 
+                                <input name="price_range" class="input range" type="range" min="{{min_price}}" max="{{max_price}}" value="{{max_price}}" class="slider" id="myRange">
+                                <span class="lower_price">Rs. {{min_price}}</span>-<span class="lower_price">Rs. {{max_price}}</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="trans_form_main_info">
+                        <div class="trans_input trans_input_Pcity">
+                            <p>Search</p> <input name="search" type="text" placeholder="Search for transports">
+                        </div>
+                        <select name="search_by">
+                            <option value="model">Model</option>
+                            <option value="make">Make</option>
+                            
+                        </select>
+                        
+                        <div class="trans_input trans_input_search">
+                            <button type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="car_result">
+                <h3>Search for a car</h3>
+                
+                {% if transports %}
+                    {% for transport in transports%}
+                    {% if transport.status == True %}
+                    <div class="car_card">
+                        <div class="car_image_div">
+                            <img src="/media/{{transport.transport_image.last.image}}" alt="car">
+                        </div>
+                        <div class="car_content">
+                            <p class="main_text">{{transport.make}} {{transport.model}}</p>
+                            <p>{{transport.varient}}</p>
+                            <div class="car_icons">
+                                <div class="icon">
+                                    <i class="fa-solid fa-person"></i>
+                                    <p>{{transport.seating_capacity}}</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa-regular fa-snowflake"></i>
+                                    <p>AC</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa-solid fa-droplet"></i>
+                                    <p>{{transport.color}}</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <p>{{transport.year}}</p>
+                                </div>
+                            </div>
+                            <div class="car_terms_policies">
+                                <span>Theft Protection</span>
+                                <span>Clean Interior/Exterior</span>
+                                <span>Cancellation policies</span>
+                                <span>Term & Conditions</span>
+                            </div>
+                        </div>
+                        <div class="car_booking_price">
+                            <div class="car_price">
+                                <p>Rs {{transport.price}}</p>
+                                <p>Per Day</p>
+                            </div>
+                            <div class="book_car">
+                                <button>
+                                    <a style="text-decoration: none; color:white"  href="{% url 'get_transport' transport.slug %}">Book me</a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                
+                {% else %}
+                <h1 style="margin: auto">No transports found</h2>
+                {% endif %}                  
+            </div>
+        </div>
+    
+        
+        
+    </div>
+
+
+</body>
+</html>
+
+
+{% endblock  %}

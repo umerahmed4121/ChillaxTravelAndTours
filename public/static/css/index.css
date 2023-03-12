@@ -1,0 +1,394 @@
+@font-face {
+    font-family: myfont;
+    src: url("../custom_font/OpenSans-VariableFont_wdth\,wght.ttf");
+}
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    background-color: rgb(247, 253, 255);
+    font-family:myfont;
+}
+
+.container{
+    overflow-x: hidden;
+}
+.places_form{
+    background-color: rgb(10, 17, 54);
+    color: white;
+    padding: 2em 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+
+}
+.places_form h3{
+    justify-self: flex-start;
+    font-weight: 300;
+    font-size: 1.5em;
+    margin: 0;
+    margin-bottom:0.5em ;
+}
+.places_form input,.places_form select{
+    flex-basis: 120px;
+    padding: 0.5em 0.5em;
+    font-size: 1.05em;
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+    border: 1px solid rgb(136, 136, 136);
+    border-radius: 0.3em;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+.places_form button{
+    background-color: rgb(243, 92, 92);
+    color: white;
+    font-size: 1.1em;
+    border-radius: 0.3em;
+    padding:0.5em 2.5em ;
+    border: none;
+}
+.places_form button:hover{
+    background-color: rgb(82, 202, 250);
+    color: white;
+    
+}
+.places_form form{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+/* popular destination */
+
+.popular_dest{
+    padding: 5.5em 4em;
+    max-width: 1200px;
+    margin: auto;
+}
+.popular_dest>h3{
+    font-size: 2.2em;
+    text-align: center;
+}
+.popular_dest>p{
+    color: rgb(82, 82, 82);
+    max-width: 75%;
+    margin: auto;
+    text-align: center;
+    margin-bottom:2em ;
+}
+.dest_grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-auto-rows: minmax(300px,400px);
+    gap: 2em;
+}
+.grid-dest_card{
+    padding: 1.5em;
+    display: flex;
+    align-items: flex-end;
+    transition: transform 0.5s;
+    border-radius: 0.4em;
+    background-image: url("../images/city.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.dest_grid>*:hover{
+    transform: translate(0,-1em) scale(1.01);
+    box-shadow: 2px 2px 20px grey;
+
+}
+.grid-dest_card p{
+    color: white;
+    font-size: 1.5em;
+    
+}
+.grid-dest_card a{
+    color: white;
+    font-size: 0.7em;
+    text-decoration: none;
+    padding: 0.5em 0.3em;
+    border-radius: 0.3em;
+    background-color: rgb(14, 194, 218);
+    
+}
+.grid-dest_card:hover a{
+    background-color: coral;
+    
+}
+
+.places_card-text a{
+    color: rgb(10, 17, 54);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.places_card-text a:hover {
+    color: coral;;
+  }
+
+
+@media screen and (max-width:750px) {
+    .popular_dest{
+        padding: 3em 1em;
+    }
+    .popular_dest h3{
+        font-size: 1.8em;
+    }
+}
+
+
+/* Popular places */
+.grid-pop_places_card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    transition: transform 0.5s;
+    border-radius: 0.4em;
+    overflow: hidden;
+    position: relative;
+}
+.grid-pop_places_card-price{
+    position: absolute;
+    top: 0;left: 0;
+    translate:50% 50%;
+    padding: 0.4em 0.5em;
+    background-color: rgb(39, 225, 238);
+    color: white;
+    border-radius: 0.5em;
+}
+.places_card-img{
+    height: 60%;
+}
+.grid-pop_places_card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.places_card-text{
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    color: rgb(104, 104, 104);
+}
+.places_card-text h4{
+    font-size: 1.4em;
+    margin: 0;
+    color: black;
+}
+.grid-pop_places_card:hover h4{
+    color: coral;
+}
+.grid-pop_places_card:hover .grid-pop_places_card-price{
+    background-color: coral;
+}
+.pop_places_last_div{
+    display: flex;
+    justify-content: space-between;
+}
+.rating_review{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.rating_review i{
+    font-size: 0.7em;
+    color: rgb(235, 182, 10);
+}
+.popular_dest{
+    background-color: aliceblue;
+}
+
+
+
+/* service section */
+
+.service-section{
+    max-width: 1000px;
+    width: 90%;
+    margin:auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+.services-card{
+    flex: 0 1 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.services-card>i{
+    font-size: 4em;
+    color: rgb(247, 74, 11);
+}
+.services-card>p{
+    color: grey;
+}
+.services-card>h4{
+    font-size: 1.5em;
+    margin:0.5em 0 ;
+    font-weight: 200;
+}
+
+/* comment section */
+
+
+
+.main_testimonial{
+    margin-top: 3em;
+    margin-bottom: 3em;
+    background-color: rgb(238, 249, 253);
+}
+.lower_testimonial{
+    margin: auto;
+    max-width: 900px;
+    display: flex;
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+}
+.lower_testimonial::-webkit-scrollbar {
+   height: 5px;
+}
+.lower_testimonial::-webkit-scrollbar-thumb {
+    background: rgb(117, 117, 117); 
+    border-radius: 10px;
+  }
+.testimonial_card{
+    text-align: center;
+    padding: 3em 2em;
+    flex: 1 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-snap-align: start;
+}
+.testimonial_card .img{
+    width: 7.5em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    /* overflow: hidden; */
+    position: relative;
+}
+.testimonial_card .img::before{
+    content:  "\201c";
+    font-family:'Trebuchet MS';
+    height: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    right: 80%;
+    font-size: 6em;
+    color: white;
+    position: absolute;
+    background-color: rgb(38, 241, 255);
+}
+.testimonial_card .light{
+    color: grey;
+}
+.testimonial_card .light::before{
+    content: "\2014\0020";
+}
+
+.testimonial_card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+.recent_places {
+    background-color:transparent;
+}
+.recent_places p{
+    color: black;
+    font-size: 1.1em;
+}
+.recent_places .light{
+    color: rgb(77, 77, 77);
+    font-size: 0.8em;
+}
+
+/* foooter */
+
+footer{
+    padding: 3em;
+    background-color: rgb(9, 9, 59);
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    text-align: center;
+    justify-content: space-around;
+}
+footer a, footer p{
+    font-size: 0.9em;
+    text-align: center;
+    color: rgb(209, 209, 209);
+    text-decoration: none;
+}
+footer a:hover{
+    color: coral;
+}
+footer ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+footer img{
+    
+    width: 240px;
+    height: 118px;
+    aspect-ratio: 1;
+    border-radius: 0.1em;
+}
+footer>*{
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    
+}
+.footer_popular_dest>div{
+    display: flex;
+    gap: 1em;
+}
+.footer_insta{
+    max-width: 200px;
+}
+.insta_images{
+    display: flex;
+    gap: 0.5em;
+    flex-wrap: wrap;
+}
+
+.insta_images img{
+    height: 50px;
+    width: 50px;
+}
+
+
+
+
+
+
+@media  screen and (max-width:700px) {
+    footer{
+        font-size: 0.8em;
+    }
+    .service-section{
+        flex-direction: column;
+    }
+}

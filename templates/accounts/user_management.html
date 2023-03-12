@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+    <!-- order matters -->
+    <script
+      src="https://kit.fontawesome.com/e42bda399a.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="/media/css/left_sidebar.css" />
+    <link rel="stylesheet" href="/media/css/top_section.css" />
+    <link rel="stylesheet" href="/media/css/tour_managment.css" />
+    
+  </head>
+  <body>
+    <div class="container">
+     
+      {% extends 'base/base_admin.html' %}
+      {% block start %}
+      <!-- content -->
+      <div class="center_content">
+        <div class="all_packages">
+          <h3>All Users</h3>
+          
+            {% if all_users %}
+            <table class="table-content package-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Address</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Country</th>
+                  <th>Created</th>
+                  <th>Updated</th>
+                  <th>Operations</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in all_users %}
+                <tr>
+                  <td>{{user.user.first_name}} {{user.user.last_name}}</td>
+                  <td>{{user.user.email}}</td>
+                  <td>{{user.address}}</td>
+                  <td>{{user.city}}</td>
+                  <td>{{user.state}}</td>
+                  <td>{{user.country}}</td>
+                  <td>{{user.created_at}}</td>
+                  <td>{{user.updated_at}}</td>
+                  
+                  <td>
+                    <a href="{% url 'delete_user' user.user.email %}" style="color: #009879"
+                      ><i class="fa-sharp fa-solid fa-trash"> Delete</i></a
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <h1>No records found</h1>
+            {% endif %}
+          
+
+          
+        </div>
+      </div>
+
+    </div>
+  
+    <script src="/media/javascript/tour_managment.js"></script>
+  </body>
+
+
+</html>
+{% endblock %}

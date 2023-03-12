@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit </title>
+    <!-- order matters -->
+    <script
+      src="https://kit.fontawesome.com/e42bda399a.js"
+      crossorigin="anonymous"
+    ></script>
+
+    
+    <link rel="stylesheet" href="/media/css/tour_managment.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- left sidebar -->
+      {% extends 'base/base_admin.html' %}
+      {% block start %}
+      
+      
+
+      <!-- content -->
+      <div class="center_content">
+        <form class="tour_form" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="popup_tour_container">
+            <h2>Edit {{item}}</h2>
+            {% include "base/alert.html" %}
+            <div class="tour_form_main_info">
+              {% for field in fields %}
+              <div class="tour_input tour_input_From">
+                <p>{{field.label}}</p>
+                <input
+                  name="{{field.name}}"
+                  required
+                  type="text"
+                  placeholder="{{field.placeholder}}"
+                  value="{{field.value}}"
+                />
+              </div>
+              {% endfor %}
+
+              <div class="tour_input tour_input_From">{{form.as_p}}</div>
+              {% if item_images %}
+              <div class="tour_input tour_input_From">
+                <table class="table-content package-table">
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Operations</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for image in item_images %}
+                    <tr>
+                      <td>{{image.image}}</td>
+                      <td>
+                        {% if item == "package" %}
+                        <a
+                          href="{% url 'delete_image' 'package' package.uid image.uid %}"
+                          style="color: #009879"
+                          ><i class="fa-sharp fa-solid fa-trash"> Delete</i></a
+                        >
+                        {% elif item == "hotel" %}
+                        <a
+                          href="{% url 'delete_image' 'hotel' hotel.uid image.uid %}"
+                          style="color: #009879"
+                          ><i class="fa-sharp fa-solid fa-trash"> Delete</i></a
+                        >
+                        {% elif item == "transport" %}
+                        <a
+                          href="{% url 'delete_image' 'transport' transport.uid image.uid %}"
+                          style="color: #009879"
+                          ><i class="fa-sharp fa-solid fa-trash"> Delete</i></a
+                        >
+                        {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              {% endif %}
+
+              <div class="tour_input tour_input_From">
+                <button
+                  type="submit"
+                  class="tour_input tour_input_From"
+                  style="background-color: #009879"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- pop up adding a tour form -->
+
+  
+    <script src="/media/javascript/tour_managment.js"></script>
+  </body>
+</html>
+{% endblock %}

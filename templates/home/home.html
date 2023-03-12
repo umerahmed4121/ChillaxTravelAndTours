@@ -1,0 +1,245 @@
+{% extends 'base/base.html' %}
+
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://kit.fontawesome.com/e42bda399a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="media/css/index.css">
+    <link rel="stylesheet" href="media/css/top_section.css">
+    <link rel="stylesheet" href="media/css/main_crousel.css">
+    
+</head>
+<body>
+    <div class="container">
+
+        <!-- navigation bar -->
+        <!-- link top_section -->
+        
+
+        <!--link main crousel -->
+
+        <div class="main_crousel">
+            <a href="/destinations" class="anchor">Explore Now</a>
+            <div class=" main_crousel-card">
+                <h2>Indonesia</h2>
+            </div>
+            <div class="main_crousel-card">
+                <h2>Iceland</h2>
+            </div>
+            <div class="main_crousel-card">
+                <h2>Switzerland</h2>
+            </div>
+        </div>
+
+        
+    <!-- link index -->
+        <div class="places_form">
+            <h3>Whats on your mind?</h3>
+            <form method="GET">
+                <input name="search" type="text" placeholder="packages, hotels or transports">
+                <select name="search_by" id="cars">
+                    <option value="package">Packages</option>
+                    <option value="hotel">Hotels</option>
+                    <option value="model">Transport</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+            
+            
+        </div>
+        <!-- link index -->
+        <div class="popular_dest">
+            <h3>Popular Destination</h3>
+            <p>Suffered alteration in some form, by injected humour or good day randomised booth anim 8-bit hella wolf moon beard words. </p>
+            <div class="dest_grid">
+                {% for package in packages %}
+                <div class="grid-dest_card" style="background-image: url('/media/{{package.package_image.last.image}}');">
+                    <p>{{package.location}} <a href="{% url 'get_package' package.slug %}">Explore</a></p>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        <div class="popular_dest">
+            <h3>Popular Packages</h3>
+            <p>Suffered alteration in some form, by injected humour or good day randomised booth anim 8-bit hella wolf moon beard words. </p>
+            <div class="dest_grid">
+                <!-- new cards -->
+                {% for package in packages %}
+                <div class="grid-pop_places_card">
+                    <div class="grid-pop_places_card-price">Rs. {{package.price}}</div>
+                    <div class="places_card-img">
+                        <a href="{% url 'get_package' package.slug %}"><img src="/media/{{package.package_image.last.image}}" alt=""></a>
+                        
+                    </div>
+                    <div class="places_card-text">
+                        <h4><a href="{% url 'get_package' package.slug %}" class="title" style='text-decoration:none;'>
+                            {{package.title}}
+                        </a></h4>
+                        <p>{{package.location}}</p>
+                        <div class="pop_places_last_div">
+                            <div class="rating_review">
+                                <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-light fa-star"></i></div>
+                                <p>(20 Review)</p>
+                            </div>
+                            <div>
+                                <p><i class="fa-solid fa-clock"></i> {{package.duration}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+            <div style="display:flex;justify-content:center;padding-top: 2em;">
+                <a href="/destinations" class="anchor">More Packages</a>
+            </div>
+        </div>
+
+        <div class="popular_dest">
+            <h3>Popular Hotels</h3>
+            <p>Suffered alteration in some form, by injected humour or good day randomised booth anim 8-bit hella wolf moon beard words. </p>
+            <div class="dest_grid">
+                <!-- new cards -->
+                {% for hotel in hotels %}
+                <div class="grid-pop_places_card">
+                    <div class="grid-pop_places_card-price">Rs. {{hotel.price}}</div>
+                    <div class="places_card-img">
+                        <a href="{% url 'get_hotel' hotel.slug %}"><img src="/media/{{hotel.hotel_image.last.image}}" alt=""></a>
+                    </div>
+                    <div class="places_card-text">
+                        <h4><a href="{% url 'get_hotel' hotel.slug %}" class="title" style='text-decoration:none'>
+                            <b>{{hotel.name}}</b>
+                        </a></h4>
+                        <p>{{hotel.location}}</p>
+                        <div class="pop_places_last_div">
+                            <div class="rating_review">
+                                <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-light fa-star"></i></div>
+                                <p>(20 Review)</p>
+                            </div>
+                            <div>
+                                <p><i class="fa-solid fa-bed"></i> {{hotel.rooms}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            
+            </div>
+            <div style="display:flex;justify-content:center;padding-top: 2em;">
+                <a href="/hotels" class="anchor">More Hotels</a>
+            </div>
+        </div>
+
+        
+        <div class="popular_dest">
+            <h3>Popular Transports</h3>
+            <p>Suffered alteration in some form, by injected humour or good day randomised booth anim 8-bit hella wolf moon beard words. </p>
+            <div class="dest_grid">
+                <!-- new cards -->
+                {% for transport in transports %}
+                <div class="grid-pop_places_card">
+                    <div class="grid-pop_places_card-price">Rs. {{transport.price}}/day</div>
+                    <div class="places_card-img">
+                        <a  href="{% url 'get_transport' transport.slug %}">
+                            <img src="/media/{{transport.transport_image.last.image}}" alt="">
+                        </a>
+                         
+                    </div>
+                    <div class="places_card-text">
+                        <h4>
+                            <a  href="{% url 'get_transport' transport.slug %}">
+                                {{transport.model}}
+                            </a>
+                        </h4>
+                        <p>{{transport.make}}</p>
+                        <div class="pop_places_last_div">
+                            <div class="rating_review">
+                                <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-light fa-star"></i></div>
+                                <p>(20 Review)</p>
+                            </div>
+                            <div>
+                                <p><i class="fa-solid fa-people-group"></i> {{transport.seating_capacity}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            
+            </div>
+            <div style="display:flex;justify-content:center;padding-top: 2em;">
+                <a href="/transports" class="anchor">More Transports</a>
+            </div>
+        </div>
+
+        <!-- services -->
+        <div class="service-section">
+            <div class="services-card">
+                <i class="fa-solid fa-train"></i>
+                <h4>Comfortable Journey</h4>
+                <p>A wonderful serenity has taken to the possession of my entire soul.</p>
+            </div>
+            <div class="services-card">
+                <i class="fa-solid fa-hotel"></i>
+                <h4>Luxuries Hotel</h4>
+                <p>A wonderful serenity has taken to the possession of my entire soul.</p>
+            </div>
+            <div class="services-card">
+                <i class="fa-solid fa-earth-americas"></i>
+                <h4>Travel Guide</h4>
+                <p>A wonderful serenity has taken to the possession of my entire soul.</p>
+            </div>
+        </div>
+
+        <!-- testimonial -->
+        <div class="main_testimonial">
+            <div class="lower_testimonial">
+                <div class="testimonial_card">
+                    <div class="img"><img src="/media/images/comments_images.jfif" alt=""></div>
+                    <p>“The world is a book and those who do not travel read only one page.”</p>
+                    <p class="light">Saint Augustine</p>
+                </div>
+                
+
+            </div>
+        </div>
+        <!-- recent places -->
+        <div class="recent_places popular_dest">
+            <h3>Recent Trips</h3>
+            <div class="dest_grid">
+                {% for package in packages %}
+                <div class="grid-pop_places_card">
+                    <div class="places_card-img">
+                        <img src="/media/{{package.package_image.last.image}}" alt="">
+                    </div>
+                    <div class="places_card-text">
+                        <p class="light">{{package.created_at}}</p>
+                        <p>{{package.title}}</p>
+                        
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+
+        <!-- footer -->
+        
+    </div>
+  </body>
+  
+</html>
+
+
+</body>
+</html>
+
+{% endblock  %}

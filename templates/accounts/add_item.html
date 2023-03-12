@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- order matters -->
+    <script
+      src="https://kit.fontawesome.com/e42bda399a.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="/media/css/tour_managment.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- left sidebar -->
+      {% extends 'base/base_admin.html' %}
+      {% block start %}
+
+      <!-- content -->
+      <div class="center_content">
+  
+          <form class="tour_form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="popup_tour_container">
+              <h2>Add {{item}}</h2>
+              {% include "base/alert.html" %}
+              <div class="tour_form_main_info">
+                {% for field in fields %}
+                <div class="tour_input tour_input_From">
+                  <p>{{field.label}}</p>
+                  <input
+                    name="{{field.name}}"
+                    required
+                    type="text"
+                    placeholder="{{field.placeholder}}"
+                  />
+                </div>
+                {% endfor %}
+
+                <div class="tour_input tour_input_From">{{form.as_p}}</div>
+
+                <div class="tour_input tour_input_From">
+                  <button type="submit" class="tour_input tour_input_From">
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        
+      </div>
+    </div>
+
+    <!-- pop up adding a tour form -->
+
+    <script src="/media/javascript/tour_managment.js"></script>
+  </body>
+</html>
+{% endblock %}

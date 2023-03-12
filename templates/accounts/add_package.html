@@ -1,0 +1,61 @@
+{% block start %}
+{% include "base/alert.html" %}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Add {{item}}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="https://kit.fontawesome.com/e42bda399a.js" crossorigin="anonymous"></script>
+    
+        <link rel="stylesheet" href="/media/css/left_sidebar.css">
+        <link rel="stylesheet" href="/media/css/tour_managment.css">
+    </head>
+    <body>
+        
+        <form class="tour_form" method="POST">
+            {% csrf_token %}
+            <div class="popup_tour_container">
+                <h2>Add a package</h2>
+                <div class="tour_form_main_info">
+                    <div class="tour_input tour_input_From">
+                        <p>Title :</p> <input name="title" required type="text" placeholder="Enter a title">
+                    </div>
+                    <div class="tour_input tour_input_From">
+                        <p>Location :</p> <input name="location" required type="text" placeholder="Enter a location">
+                    </div>
+                    <div class="tour_input tour_input_From">
+                        <p>Activites included :</p> <input name="activites_inc" required type="text" placeholder="Enter activites included">
+                    </div>
+                    <div class="tour_input tour_input_From">
+                        <p>Activites not included :</p> <input name="activites_not" required type="text" placeholder="Enter activites not included">
+                    </div>
+                    <div class="tour_input tour_input_From">
+                        <p>Duration :</p> <input name="duration" required type="text" placeholder="Enter a duration">
+                    </div>
+                    <div class="tour_input tour_input_From">
+                        <p>Price :</p> <input name="price" required type="number" placeholder="Enter a price">
+                    </div>
+                    <div class="tour_input tour_input_From">
+                        <p>Details :</p> <input name="details" required type="text" placeholder="Enter details">
+                    </div>
+                    <div class="tour_input tour_input_From">
+                        <p>Pictures :</p> <input name="image" multiple type="file">
+                    </div>
+                    
+                    <div class="tour_input tour_input_From">
+                        <button type="submit" class="tour_input tour_input_From">Add</button>
+                    </div>
+                </div>
+            </div>  
+        </form>
+        
+    </body>
+</html>
+
+{% endblock %}
